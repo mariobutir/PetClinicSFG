@@ -7,18 +7,16 @@ import com.example.sfgpetclinic.model.Owner;
 import com.example.sfgpetclinic.model.Vet;
 import com.example.sfgpetclinic.services.OwnerService;
 import com.example.sfgpetclinic.services.VetService;
-import com.example.sfgpetclinic.services.map.OwnerServiceMap;
-import com.example.sfgpetclinic.services.map.VetServiceMap;
 
 @Component
 public class DataLoader implements CommandLineRunner {
 
-	private OwnerService ownerService;
-	private VetService vetService;
+	private final OwnerService ownerService;
+	private final VetService vetService;
 
-	public DataLoader() {
-		this.ownerService = new OwnerServiceMap();
-		this.vetService = new VetServiceMap();
+	public DataLoader(OwnerService ownerService, VetService vetService) {
+		this.ownerService = ownerService;
+		this.vetService = vetService;
 	}
 
 	@Override
@@ -37,6 +35,7 @@ public class DataLoader implements CommandLineRunner {
 		owner2.setLastName("Lekić");
 
 		ownerService.save(owner2);
+		System.out.println("Loading owners...");
 
 		Vet vet1 = new Vet();
 		vet1.setId(1L);
@@ -51,6 +50,7 @@ public class DataLoader implements CommandLineRunner {
 		vet2.setLastName("Torba");
 
 		vetService.save(vet2);
+		System.out.println("Loading vets...");
 	}
 
 }
